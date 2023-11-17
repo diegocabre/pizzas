@@ -1,22 +1,39 @@
-import { createContext, useState, useEffect } from "react";
-import axios from "axios";
+import { createContext, useState } from "react";
 
 export const MyContext = createContext();
 
 export const MyProvider = ({ children }) => {
-    const [pizzas, setPizzas] = useState([]);
-    const getPizzas = async () => {
-        const res = await axios.get("./pizzas.json");
-        setPizzas(res.data);
+    const [cartItems, setCartItems] = useState([]);
+
+    const addToCart = (pizza) => {
+        setCartItems([...cartItems, pizza]);
     };
 
-    useEffect(() => {
-        getPizzas();    
-    }, []);
+    const removeFromCart = (pizzaId) => {
+        const updatedCart = cartItems.filter((item) => itemId !== pizzaId);
+        setCartItems(updatedCart);
+    };
+
+    const clearCart = () => {
+        setCartItems([]);
+    };
+
+    const calculateTotal = () => {
+        return cartItems.reduce((total, item) => total + item.price, 0);
+    };
 
     return (
-        <MyContext.Provider value={{ pizzas }}>
+        <MyContext.Provider
+            value={{
+                cartItems,
+                addToCart,
+                removeFromCart,
+                clearCart,
+                calculateTotal
+            }}
+        >
             {children}
         </MyContext.Provider>
     )
+
 }

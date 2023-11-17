@@ -1,8 +1,8 @@
-import NavBar from "./components/NavBar";
-import { Navigate, Routes, Route } from "react-router-dom";
-import { Pizza } from "./views/Pizza";
-import { Carrito } from "./views/Carrito";
-import { Home } from "./views/Home";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Home from "./components/Home";
+import { Pizza } from "./components/Pizza";
+import { Cart } from "./components/Cart";
+import { NavBar } from "./components/NavBar";
 
 export default function App() {
   return (
@@ -10,8 +10,8 @@ export default function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/pizza:id" element={<Pizza />} />
-        <Route path="/carrito" element={<Carrito />} />
+        <Route path="/pizza/:id" element={<Pizza />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
