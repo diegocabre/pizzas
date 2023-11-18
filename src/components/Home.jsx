@@ -24,6 +24,7 @@ const Home = () => {
          {pizzasData.ingredients.map((ingredient) => (
            <Card.Text className="textPizza" key={ingredient}>{ingredient}</Card.Text>
          ))}
+         <Card.Text className="textPizza">Precio: ${pizzasData.price}</Card.Text>
           <button className="buttonAdd" onClick={() => agregarAlCarrito(pizzasData)}>Añadir</button>
           <button className="buttonBack" onClick={() => navigate(`/pizza/${pizzasData.id}`)}>Ver Más</button>
         </Card.Body>
