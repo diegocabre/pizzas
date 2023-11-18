@@ -17,16 +17,15 @@ const Home = () => {
     <div>
       {pizzasData.map((pizzasData) => (
         <div key={pizzasData.id}>
-      <Card>
-        <Card.Img variant="top" src={pizzasData.img} />
-        <Card.Body>
-          <Card.Title>{pizzasData.name}</Card.Title>
-          <Card.Text>{pizzasData.ingredients[0]}</Card.Text>
-          <Card.Text>{pizzasData.ingredients[1]}</Card.Text>
-          <Card.Text>{pizzasData.ingredients[2]}</Card.Text>
-          <Card.Text>{pizzasData.ingredients[3]}</Card.Text>
-          <button>Añadir</button>
-          <button onClick={() => navigate(`/pizza/${pizzasData.id}`)}>Ver Más</button>
+      <Card className="containerPizza">
+        <Card.Img className="imgPizza" variant="top" src={pizzasData.img} />
+        <Card.Body className="bodyPizza">
+          <Card.Title className="titlePizza">{pizzasData.name}</Card.Title>
+         {pizzasData.ingredients.map((ingredient) => (
+           <Card.Text className="textPizza" key={ingredient}>{ingredient}</Card.Text>
+         ))}
+          <button className="buttonAdd" onClick={() => agregarAlCarrito(pizzasData)}>Añadir</button>
+          <button className="buttonBack" onClick={() => navigate(`/pizza/${pizzasData.id}`)}>Ver Más</button>
         </Card.Body>
       </Card>
       </div>

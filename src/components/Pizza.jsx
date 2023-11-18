@@ -23,16 +23,16 @@ export const Pizza = () => {
 
   return (
     <div>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={pizza2.img} />
-        <Card.Body style={{ backgroundColor: "pink" }}>
-          <Card.Title>{pizza2.name}</Card.Title>
-          <Card.Text>{pizza2.desc}</Card.Text>
+      <Card className="containerPizza" style={{ width: "18rem" }}>
+        <Card.Img className="imgPizza" variant="top" src={pizza2.img} />
+        <Card.Body className="bodyPizza">
+          <Card.Title className="titlePizza">{pizza2.name}</Card.Title>
+          <Card.Text className="textPizza">{pizza2.desc}</Card.Text>
           {pizza2.ingredients.map((ingredient) => (
-            <Card.Text key={ingredient}>{ingredient}</Card.Text>
+            <Card.Text className="textPizza" key={ingredient}>{ingredient}</Card.Text>
           ))}
-          <button onClick={() => agregarAlCarrito(pizza2)}>Añadir</button>
-          <button onClick={() => navigate("/home")}>Volver</button>
+          <button className="buttonAdd" onClick={() => agregarAlCarrito(pizza2)}>Añadir</button>
+          <button className="buttonBack" onClick={() => navigate("/home")}>Volver</button>
         </Card.Body>
       </Card>
     </div>
