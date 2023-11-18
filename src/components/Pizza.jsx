@@ -31,6 +31,7 @@ export const Pizza = () => {
           {pizza2.ingredients.map((ingredient) => (
             <Card.Text className="textPizza2" key={ingredient}>{ingredient}</Card.Text>
           ))}
+          <Card.Text className="textPizza2">Precio: ${pizza2.price}</Card.Text>
           <button className="buttonAdd" onClick={() => agregarAlCarrito(pizza2)}>Añadir</button>
           <button className="buttonBack" onClick={() => navigate("/home")}>Volver</button>
         </Card.Body>
