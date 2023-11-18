@@ -3,10 +3,11 @@ import Home from "./components/Home";
 import { Pizza } from "./components/Pizza";
 import { Cart } from "./components/Cart";
 import { NavBar } from "./components/NavBar";
+import "./App.css";
 
 export default function App() {
   return (
-    <>
+    <div className="App">
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -14,6 +15,6 @@ export default function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </>
+    </div>
   );
 }
