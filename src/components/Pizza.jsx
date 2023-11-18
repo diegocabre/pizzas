@@ -23,7 +23,7 @@ export const Pizza = () => {
 
   return (
     <div>
-      <Card className="containerPizza" style={{ width: "18rem" }}>
+      <Card className="containerPizza2">
         <Card.Img className="imgPizza" variant="top" src={pizza2.img} />
         <Card.Body className="bodyPizza">
           <Card.Title className="titlePizza">{pizza2.name}</Card.Title>
