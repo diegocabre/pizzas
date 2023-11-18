@@ -1,39 +1,31 @@
-import { createContext, useState } from "react";
+import React, { useState, useEffect, createContext } from "react";
+import jsonData from "../../public/pizzas.json";
 
 export const MyContext = createContext();
 
 export const MyProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
+  const [pizzas, setPizzas] = useState([]);
+  const [carrito, setCarrito] = useState([]);
 
-    const addToCart = (pizza) => {
-        setCartItems([...cartItems, pizza]);
-    };
+  useEffect(() => {
+    setPizzas(jsonData);
+  }, []);
 
-    const removeFromCart = (pizzaId) => {
-        const updatedCart = cartItems.filter((item) => itemId !== pizzaId);
-        setCartItems(updatedCart);
-    };
+  const agregarAlCarrito = (pizza) => {
+    setCarrito((prevCarrito) => [...prevCarrito, pizza]);
+  };
 
-    const clearCart = () => {
-        setCartItems([]);
-    };
+  const removerDelCarrito = (pizzaId) => {
+    setCarrito((prevCarrito) =>
+      prevCarrito.filter((pizza) => pizza.id !== pizzaId)
+    );
+  };
 
-    const calculateTotal = () => {
-        return cartItems.reduce((total, item) => total + item.price, 0);
-    };
-
-    return (
-        <MyContext.Provider
-            value={{
-                cartItems,
-                addToCart,
-                removeFromCart,
-                clearCart,
-                calculateTotal
-            }}
-        >
-            {children}
-        </MyContext.Provider>
-    )
-
-}
+  return (
+    <MyContext.Provider
+      value={{ pizzas, carrito, agregarAlCarrito, removerDelCarrito }}
+    >
+      {children}
+    </MyContext.Provider>
+  );
+};

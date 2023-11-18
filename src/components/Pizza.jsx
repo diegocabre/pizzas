@@ -1,36 +1,38 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { MyContext } from "../context/MyContext";
+import "./Home.css";
 import { Card } from "react-bootstrap";
 
 export const Pizza = () => {
+  const { pizzas } = useContext(MyContext);
   const { id } = useParams();
-  const [pizza, setPizza] = useState(null);
   const navigate = useNavigate();
+  function agregarAlCarrito(pizza) {
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    carrito.push(pizza);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    navigate("/carrito");
+  }
 
-  const goBack = () => {
-    navigate("/");
-  };
+  function buscarPizza(id) {
+    return pizzas.find((pizza) => pizza.id === id);
+  }
 
-  useEffect(() => {
-    if (!id) return;
-    const getPizza = async () => {
-      const response = await axios.get("../../public/pizzas.json");
-      setPizza(response.data);
-    };
-    getPizza();
-  }, [id]);
+  const pizza2 = buscarPizza(id);
 
   return (
     <div>
-      <Card className="card" style={{ width: "18rem" }}>
-        <Card.Img   variant="top" src={pizza?.img} />
-        <Card.Body>
-          <Card.Title>{pizza?.name}</Card.Title>
-          <Card.Text>{pizza?.description}</Card.Text>
-          <Card.Text>${pizza?.price}</Card.Text>
-          <button onClick={goBack}>Volver</button>
-          <button>Comprar</button>
+      <Card style={{ width: "18rem" }}>
+        <Card.Img variant="top" src={pizza2.img} />
+        <Card.Body style={{ backgroundColor: "pink" }}>
+          <Card.Title>{pizza2.name}</Card.Title>
+          <Card.Text>{pizza2.desc}</Card.Text>
+          {pizza2.ingredients.map((ingredient) => (
+            <Card.Text key={ingredient}>{ingredient}</Card.Text>
+          ))}
+          <button onClick={() => agregarAlCarrito(pizza2)}>Añadir</button>
+          <button onClick={() => navigate("/home")}>Volver</button>
         </Card.Body>
       </Card>
     </div>
